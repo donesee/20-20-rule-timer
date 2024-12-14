@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="icons8-clock.svg" type="image/x-icon">
+    <title>20 min Timer</title>
+</head>
+<body>
+    
+  <div class="container">
+    <h2>Take your eyes of the screen for 1 minute.</h2>
+    <h2 id="h2h2">20/20 rule</h2>
+    <input type="text" id="customTime" placeholder="min/sec"> <button id="addCustom" onclick="customTime()">Set Time</button>
+    
+    
+
+    <div id="time">
+        <h1 id="timer">20:00</h1>
+    </div>
+    
+    <div id="btns">
+    <button class="btn" id="start" onclick="count()"><i class="material-icons">play_arrow</i></button>
+    <button class="btn" id="pause"><i class="material-icons">pause</i></button>
+    <button class="btn" id="reset"><i class="material-icons">replay</i></button>
+</div>
+  </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
