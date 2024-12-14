@@ -6,6 +6,7 @@ const timerApp = {
     counter: 100,
     intervalID: null,
     isPlaying: false,
+    isRunning: false,
     alarm: new Audio('ringtone.mp3'),
     displayCount(){
         timer.textContent = `${this.minutes.toString().padStart(2, 0)}:${this.seconds.toString().padStart(2, 0)}`
@@ -24,6 +25,7 @@ timerApp.displayCount();
 
 
 function customTime(){
+    timerApp.isRunning = false;
     pauseAlarm()
     customValue = custom.value;
     let ms = customValue.split("/")
@@ -54,27 +56,35 @@ function customTime(){
 };
 
 function count(){
-    timerApp.intervalID = setInterval(() => {
-        if(timerApp.seconds === 0 && timerApp.minutes === 0){
-            clearInterval(timerApp.intervalID)
-            playAlarm();
-        }
-        else if(timerApp.seconds === 0){
-            timerApp.minutes--;
-            timerApp.seconds = 59
+    if(!timerApp.isRunning){
+        timerApp.isRunning = true;
+        timerApp.intervalID = setInterval(() => {
+            if(timerApp.seconds === 0 && timerApp.minutes === 0){
+                clearInterval(timerApp.intervalID)
+                playAlarm();
             }
-        else{
-            timerApp.seconds--;
-            }
-            timerApp.displayCount();
-   
+            else if(timerApp.seconds === 0){
+                timerApp.minutes--;
+                timerApp.seconds = 59
+                }
+            else{
+                timerApp.seconds--;
+                }
+                timerApp.displayCount();
     }, 1000);
+}
+else{
+    return;
+}
 
 }
+
+
 
 reset.addEventListener("click", () => {
     clearInterval(timerApp.intervalID);
     customValue = custom.value;
+    timerApp.isRunning = false;
     
     if(!customValue){
         timerApp.minutes = 20
@@ -89,6 +99,7 @@ reset.addEventListener("click", () => {
 
 pause.addEventListener("click", () => {
     clearInterval(timerApp.intervalID);
+    timerApp.isRunning = false;
 })
 
 const playAlarm = () => {
